@@ -7,6 +7,8 @@ import { Trash } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useParams, useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
@@ -20,9 +22,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import toast from "react-hot-toast";
-import axios from "axios";
 import { Alertmodal } from "@/components/modals/alert-modal";
+import { ApiAlert } from "@/components/ui/api-alert";
+import { useOrigin } from "@/hooks/use-origin";
 
 interface SettingsFormProps {
   initialData: Store;
@@ -37,6 +39,7 @@ type SettingsFormValues = z.infer<typeof formSchema>;
 export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
   const router = useRouter();
   const params = useParams();
+  const origin = useOrigin();
 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -111,6 +114,12 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
           </Button>
         </form>
       </Form>
+      <Separator />
+      <ApiAlert
+        title="NEXT_PUBLIC_API_URL"
+        description={`${origin}/api/${params.storeId}`}
+        variant="public"
+      />
     </>
   );
 };
