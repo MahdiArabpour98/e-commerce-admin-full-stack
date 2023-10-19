@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 
 import prismadb from "@/lib/prismadb";
 
+//add billboards
+
 export async function POST(req: Request, { params }: { params: { storeId: string } }) {
   try {
     const { userId } = auth();
@@ -47,6 +49,27 @@ export async function POST(req: Request, { params }: { params: { storeId: string
     return NextResponse.json(billboard);
   } catch (error) {
     console.log("[BILLBOARDS_POST]", error);
+    return new NextResponse("Internal error", { status: 500 });
+  }
+}
+
+//get billboards
+
+export async function GET(req: Request, { params }: { params: { storeId: string } }) {
+  try {
+    if (!params.storeId) {
+      return new NextResponse("Stor id is required", { status: 400 });
+    }
+
+    const billboards = await prismadb.billboard.findMany({
+      where: {
+        storeId: params.storeId,
+      },
+    });
+
+    return NextResponse.json(billboards);
+  } catch (error) {
+    console.log("[BILLBOARDS_GET]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
 }

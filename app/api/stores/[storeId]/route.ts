@@ -9,7 +9,7 @@ export async function PATCH(req: Request, { params }: { params: { storeId: strin
     const { name } = body;
 
     if (!userId) {
-      return new NextResponse("Unaouthorized", { status: 401 });
+      return new NextResponse("Unaouthenticated", { status: 401 });
     }
 
     if (!name) {
