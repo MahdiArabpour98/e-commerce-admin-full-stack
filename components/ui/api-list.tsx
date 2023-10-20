@@ -9,7 +9,7 @@ interface ApiListProps {
 
 export const ApiList: React.FC<ApiListProps> = ({ entityName, entityIdName }) => {
   const params = useParams();
-  const router = useOrigin();
+  const origin = useOrigin();
 
   const baseUrl = `${origin}/api/${params.storeId}`;
 
