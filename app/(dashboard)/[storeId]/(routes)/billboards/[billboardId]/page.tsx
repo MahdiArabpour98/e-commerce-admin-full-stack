@@ -1,5 +1,4 @@
 import prismadb from "@/lib/prismadb";
-import { useParams } from "next/navigation";
 import { BillboardForm } from "./components/billboard-form";
 
 const BillboardsPage = async ({ params }: { params: { billboardId: string } }) => {
