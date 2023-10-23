@@ -14,6 +14,9 @@ export async function GET(req: Request, { params }: { params: { categoryId: stri
       where: {
         id: params.categoryId,
       },
+      include: {
+        billboard: true,
+      },
     });
 
     return NextResponse.json(category);

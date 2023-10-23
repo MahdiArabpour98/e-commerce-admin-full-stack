@@ -84,7 +84,6 @@ export async function POST(req: Request, { params }: { params: { storeId: string
 export async function GET(req: Request, { params }: { params: { storeId: string } }) {
   try {
     const { searchParams } = new URL(req.url);
-    console.log("searchParams", searchParams.get("colorId"));
     const categoryId = searchParams.get("categoryId") || undefined;
     const colorId = searchParams.get("colorId") || undefined;
     const sizeId = searchParams.get("sizeId") || undefined;
